@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-// Android App Links verification — served at /.well-known/assetlinks.json
-// so the FindPrinter TWA (package app.findprinter.in) can hide its URL bar.
+// Served at /assetlinks (and rewritten from /.well-known/assetlinks.json via next.config.js).
+// Android App Links verification for the FindPrinter TWA (package app.findprinter.in).
 const PAYLOAD = [
   {
     relation: ['delegate_permission/common.handle_all_urls'],
@@ -19,6 +19,7 @@ export function GET() {
   return NextResponse.json(PAYLOAD, {
     headers: {
       'Cache-Control': 'public, max-age=3600',
+      'Content-Type': 'application/json',
     },
   });
 }
