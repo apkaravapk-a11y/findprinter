@@ -1,0 +1,28 @@
+# deps
+node_modules/
+.npm-cache/
+
+# next
+.next/
+out/
+
+# env
+.env
+.env.local
+.env.*.local
+.env.keystore
+
+# vercel
+.vercel/
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# brainstorm artefacts
+.superpowers/
+
+# build outputs
+*.tsbuildinfo
+next-env.d.ts
