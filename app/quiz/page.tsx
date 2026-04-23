@@ -114,6 +114,17 @@ const steps: QStep[] = [
     ],
   },
   {
+    key: 'inkTypePref',
+    q: 'Any ink-type preference?',
+    subtitle: 'Dye = vivid photos. Pigment = sharp, waterproof text. Pick "either" if unsure.',
+    kind: 'choice',
+    options: [
+      { value: 'dye', label: 'Dye ink', sub: 'Punchy photos, water-soluble', emoji: '🎨' },
+      { value: 'pigment', label: 'Pigment ink', sub: 'Sharp text, water-resistant', emoji: '🔡' },
+      { value: 'either', label: 'Either is fine', sub: 'Not sure / no preference', emoji: '🤷' },
+    ],
+  },
+  {
     key: 'brandPref',
     q: 'Any brand preference?',
     subtitle: 'Not binding — just nudges the ranking.',

@@ -68,7 +68,7 @@ export function LivePriceBlock({ asin }: { asin: string }) {
       <div className="flex items-start justify-between mb-2">
         <div>
           <div className="text-[11px] font-extrabold uppercase tracking-widest text-ink/70">
-            Live prices
+            Live prices · one-time purchase (not EMI)
           </div>
           <div className="text-xs text-ink/60 mt-0.5">
             {data

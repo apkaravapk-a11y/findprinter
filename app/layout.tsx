@@ -7,6 +7,7 @@ import { LocationProvider } from '@/components/LocationProvider';
 import { LocationBadge } from '@/components/LocationPicker';
 import { Footer } from '@/components/Footer';
 import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration';
+import { AIAssistant } from '@/components/AIAssistant';
 
 export const metadata: Metadata = {
   title: 'FindPrinter — Printers for India',
@@ -31,6 +32,8 @@ export const viewport: Viewport = {
   themeColor: '#facc15',
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -88,6 +91,7 @@ export default function RootLayout({
             <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">{children}</main>
 
             <Footer />
+            <AIAssistant />
           </LocationProvider>
         </ThemeProvider>
       </body>

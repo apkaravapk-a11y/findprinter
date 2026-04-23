@@ -4,6 +4,7 @@ import { getPrinterBySlug, printers } from '@/lib/printers';
 import { calculateTCO, formatInr } from '@/lib/tco';
 import { LivePriceBlock } from '@/components/LivePriceBlock';
 import { LocationDeliveryBlock } from '@/components/LocationDeliveryBlock';
+import { renderWriteup } from '@/lib/markdown';
 
 export function generateStaticParams() {
   return printers.map((p) => ({ slug: p.slug }));
@@ -68,6 +69,19 @@ export default async function PrinterDetail({
           <strong>Best for:</strong> {printer.bestFor}
         </div>
       </header>
+
+      {/* Full expert write-up (markdown-rendered) */}
+      {printer.writeup && (
+        <section className="brut-card p-5 md:p-6">
+          <div className="text-[11px] font-extrabold uppercase tracking-widest text-ink/70 mb-3">
+            Full expert write-up
+          </div>
+          <div
+            className="writeup space-y-3 text-ink leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: renderWriteup(printer.writeup) }}
+          />
+        </section>
+      )}
 
       {/* Dashboard grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

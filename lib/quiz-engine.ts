@@ -11,6 +11,7 @@ export type QuizAnswers = {
   scanner: 'required' | 'nice-to-have' | 'not-needed';
   mainDevice: 'phone' | 'laptop' | 'mix';
   photoSize: 'a4-only' | 'a4-plus-4x6' | 'photos-priority';
+  inkTypePref: 'dye' | 'pigment' | 'either';
   brandPref: 'canon' | 'epson' | 'hp' | 'brother' | 'no-preference';
 };
 
@@ -96,6 +97,32 @@ export function rankPrinters(answers: QuizAnswers): QuizMatch[] {
     if (answers.photoSize === 'photos-priority' && !p.features.borderless) {
       score -= 10;
       reasons.push('No borderless — photos will have white frame');
+    }
+
+    // Ink type preference (dye = vivid photos, pigment = sharp/waterproof text)
+    if (answers.inkTypePref === 'dye') {
+      if (p.category === 'ink-tank' && (p.brand === 'Canon' || p.brand === 'Epson')) {
+        score += 12;
+        reasons.push(`${p.brand} uses dye ink — vivid photos`);
+      }
+      if (p.category === 'laser-mono' || p.category === 'laser-colour') {
+        score -= 8;
+        reasons.push('Laser uses toner, not dye ink');
+      }
+    }
+    if (answers.inkTypePref === 'pigment') {
+      if (p.brand === 'HP' && p.category === 'ink-tank') {
+        score += 12;
+        reasons.push('HP Smart Tank uses pigment black — sharper, waterproof text');
+      }
+      if (p.category === 'laser-mono' || p.category === 'laser-colour') {
+        score += 10;
+        reasons.push('Laser toner behaves like pigment — archival, waterproof');
+      }
+      if (p.category === 'ink-tank' && (p.brand === 'Canon' || p.brand === 'Epson')) {
+        score -= 5;
+        reasons.push('Canon/Epson ink-tank uses dye (not pigment)');
+      }
     }
 
     // TCO over 3 years (lower is better)
